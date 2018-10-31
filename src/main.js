@@ -5,11 +5,17 @@ import Raven from 'raven-js'
 import RavenVue from 'raven-js/plugins/vue'
 
 Raven
-  .config('https://1dfc5e63808b41058675b4b3aed4cfb6@sentry.io/1298044')
+  .config('https://1dfc5e63808b41058675b4b3aed4cfb6@sentry.io/1298044', {
+    release: '1.2.4-beta'
+  })
   .addPlugin(RavenVue, Vue)
   .install()
 
-Vue.config.errorHandler = function (err, vm, info) {
+Vue.config.errorHandler = function (err) {
+  Raven.setUser({
+    name: 'miser name',
+    id: 'miser id'
+  })
   Raven.captureException(err)
 }
 
@@ -62,16 +68,4 @@ Vue.config.productionTip = false
 
 new Vue({
   render: h => h(App)
-  // renderError () {
-  //   console.log('renderError')
-  // }
-  // // errorCaptured () {
-  // //   console.log('errorCaptured')
-  // // }
 }).$mount('#app')
-
-/*
-0: TypeError: Cannot read property 'info' of undefined at VueComponent.normal …
-1: VueComponent {_uid: 1, _isVue: true, $options: {…}, _renderProxy: Proxy, _self: VueComponent, …}
-2: "created hook
-*/

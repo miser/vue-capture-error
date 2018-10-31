@@ -22,12 +22,12 @@ export default {
     HelloWorld
   },
   created () {
-    // this.normal()
+    this.normal()
     // this.fetch1()
     // this.fetch2()
     // this.fetch3()
     // this.fetch4()
-    this.fetch5()
+    // this.fetch5()
   },
   methods: {
     normal () {
